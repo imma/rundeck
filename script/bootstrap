@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+function bootstrap {
+  local shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
+  source "$shome/script/profile"
+
+  local fnm_rundeck="rundeck-launcher-${RUNDECK_VERSION}.jar"
+  cache curl "${fnm_rundeck}" "http://dl.bintray.com/rundeck/rundeck-maven/${fnm_rundeck}"
+  mkdir -p "$shome/vendor"
+  rsync -ia "$BASEBOX_CACHE/curl/${fnm_rundeck}" "$shome/vendor/${fnm_rundeck}"
+  ln -nfs "../vendor/${fnm_rundeck}" "$shome/vendor/rundeck.jar"
+}
+
+bootstrap

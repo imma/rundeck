@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function profile {
+  local shome="$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"
+
+  export RUNDECK_VERSION='2.6.7'
+}
+
+profile
