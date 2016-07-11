@@ -4,8 +4,20 @@ function bootstrap {
   local shome="${_rundeck_home:-"$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"}"
   source "$shome/script/profile"
 
-  local fnm_rundeck="rundeck-launcher-${RUNDECK_VERSION}.jar"
-  exec java -jar "$shome/vendor/${fnm_rundeck}" "$@"
+  if [[ "$#" == 0 ]]; then
+    set -- default
+  fi
+
+  case "${1:-}" in
+    default|bootstrap)
+      local fnm_rundeck="rundeck-launcher-${RUNDECK_VERSION}.jar"
+      exec java -jar "$shome/vendor/${fnm_rundeck}" "$@"
+      ;;
+    *)
+      echo "ERROR: unknown server command: ${1:-/not-supplied/}" 1>&2
+      return 1
+      ;;
+  esac
 }
 
 bootstrap
