@@ -3,7 +3,7 @@
 function profile {
   local shome="${_rundeck_home:-"$(cd -P -- "$(dirname -- "$BASH_SOURCE")/.." && pwd -P)"}"
 
-  export RUNDECK_VERSION='2.6.7'
+  export RUNDECK_VERSION='2.6.9'
 }
 
 profile
