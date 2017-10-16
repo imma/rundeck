@@ -4,7 +4,14 @@ function main {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  uname -a
+  local pth_rundeck_cli="https://github.com/rundeck/rundeck-cli/releases/download/v${RUNDECK_CLI_VERSION}/rundeck-cli-${RUNDECK_CLI_VERSION}-all.jar"
+  local pth_rundeck_server="http://dl.bintray.com/rundeck/rundeck-maven/rundeck-launcher-${RUNDECK_VERSION}.jar"
+
+  mkdir -p "$shome/vendor"
+  pushd "$shome/vendor"
+  wget -nc "$pth_rundeck_cli"
+  wget -nc "$pth_rundeck_server"
+  popd
 }
 
 main "$@"

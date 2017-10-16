@@ -8,15 +8,9 @@ function main {
     set -- default
   fi
 
-  case "${1:-}" in
-    default)
-      exec sleep 15
-      ;;
-    *)
-      echo "ERROR: unknown server command: ${1:-/not-supplied/}" 1>&2
-      return 1
-      ;;
-  esac
+  shift
+  exec rundeck "$@"
 }
 
 main "$@"
+
