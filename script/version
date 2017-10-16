@@ -4,8 +4,12 @@ function version {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  local ver_rundeck="0.0.1"
-  jq -n --arg rundeck "$ver_rundeck" '{rundeck: $rundeck}'
+  local ver_rundeck="$(basename $(cat "$shome/server/sbin/rundeckd" 2>/dev/null | grep RDECK_LAUNCHER= | cut -d"'" -f2  | awk -F / '{print $NF}' | cut -d- -f3 || true) .jar)"
+  local ver_rd="$(rd 2>&1 | grep 'Rundeck API Client Tool' | cut -d'(' -f2 | cut -d')' -f1 | sed 's#^v##' || true)"
+  jq -n \
+    --arg rundeck "$ver_rundeck" \
+    --arg rundeck_cli "$ver_rd" \
+    '{rundeck: $rundeck, rundeck_cli: $rundeck_cli}'
 }
 
 version "$@"
