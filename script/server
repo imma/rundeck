@@ -9,7 +9,8 @@ function main {
   fi
 
   shift
-  exec rundeck --skipinstall "$@"
+  export RDECK_BASE="$shome/vendor"
+  exec rundeck "$@"
 }
 
 main "$@"
