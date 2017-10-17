@@ -5,7 +5,7 @@ function main {
   source "${BLOCK_PATH:-"$shome/work"}/block/script/profile" ~
   source normalize  
 
-  exec java -jar "$shome/vendor/rundeck-launcher-${RUNDECK_VERSION}.jar" "$@"
+  exec java ${RDECK_JVM_SETTINGS:-} -jar "$shome/vendor/rundeck-launcher-${RUNDECK_VERSION}.jar" "$@"
 
 }
 
