@@ -9,7 +9,7 @@ function main {
   fi
 
   shift
-  exec rundeck "$@"
+  exec rundeck --skipinstall "$@"
 }
 
 main "$@"

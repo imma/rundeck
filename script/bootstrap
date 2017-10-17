@@ -12,6 +12,8 @@ function main {
   wget -nc "$pth_rundeck_cli"
   wget -nc "$pth_rundeck_server"
   popd
+
+  rundeck --installonly
 }
 
 main "$@"
